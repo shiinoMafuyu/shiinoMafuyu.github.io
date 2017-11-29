@@ -151,6 +151,121 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-使用Github和hexo搭建自己的博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/30/使用Github和hexo搭建自己的博客/">使用Github + Hexo创建博客</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/30/使用Github和hexo搭建自己的博客/" class="archive-article-date">
+  	<time datetime="2017-11-29T19:05:17.194Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>笔者所用工具版本：<br>nodejs : v8.9.1<br>hexo :3.4.2<br>博客主题 : yilia</p>
+<p>一种神秘存在叫坑，幸运女神或者大佬庇佑的人很少陷进去，而另一些人不仅已知的坑能踩个八九不离十，还能踩到未知的坑，这是什么技能，Excuse me？</p>
+<p>参考资料：<br><a href="https://www.cnblogs.com/visugar/p/6821777.html" target="_blank" rel="noopener">https://www.cnblogs.com/visugar/p/6821777.html</a><br><a href="https://segmentfault.com/a/1190000004947261" target="_blank" rel="noopener">https://segmentfault.com/a/1190000004947261</a></p>
+<p><strong>本地运行</strong><br>1.安装Git<br>下载地址<br>链接：<a href="https://pan.baidu.com/s/1hrG9inU" target="_blank" rel="noopener">https://pan.baidu.com/s/1hrG9inU</a> 密码：urbu<br>一路next，可以换安装目录。</p>
+<p>2.安装nodejs<br>链接：<a href="https://pan.baidu.com/s/1cm95Qe" target="_blank" rel="noopener">https://pan.baidu.com/s/1cm95Qe</a> 密码：zwmw</p>
+<p>一路next，可以换安装目录，其他不用停不用选。<br>输入：</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">node</span> <span class="title">-v</span></span><br></pre></td></tr></table></figure>
+<p>出现以下标志就算成功了。<br><img src="./images/1511975876617.jpg" alt="enter description here"><br>笔者所用的nodejs版本安装的时候一路默认过去就可以，自动添加环境变量。<br>3.安装hexo<br>打开Git Bash，执行命令</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">npm install -g hexo</span></span><br></pre></td></tr></table></figure>
+<p>使用</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">hexo -v</span></span><br></pre></td></tr></table></figure>
+<p>查看安装是否成功。</p>
+<p>hexo，据笔者目前所知基本就是用来写博客的，源文件以md格式进行编辑，之后由hexo编译成静态网页、发布到github。<br>踩坑：hexo安装若干次都是”‘hexo 不是内部或外部命令，也不是可运行的程序或批处理文件。”<br>解决：先运行命令：<br>    npm config delete prefix<br>    去掉安装目录前缀设置，再安装hexo。因为之前手贱改了这个，导致hexo作用范围不能全局覆盖。<br>若提示：<br><em>npm WARN deprecated swig@1.4.2: This package is no longer maintained</em><br>直接忽略，不影响结果。</p>
+<p>4.创建博客环境<br>创建一个blog目录用来放博客内容。<br>Git Bash，切换目录到blog下<br>初始化：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">hexo init</span></span><br></pre></td></tr></table></figure>
+<p>初始化后，blog目录如图所示<br><img src="./images/1511978790887.jpg" alt="enter description here"></p>
+<p>使用命令<br>hexo g<br>hexo s<br>在浏览器中打开网址<br><a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a></p>
+<p>效果如下<br><img src="./images/1511978942250.jpg" alt="enter description here"></p>
+<p>5.本地编译运行<br><strong>发布到Github</strong><br>1.创建Github账号<br>略。没什么好注意的<br>2.创建并关联ssh密钥<br>使用命令</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">ssh-keygen</span> <span class="selector-tag">-t</span> <span class="selector-tag">rsa</span> <span class="selector-tag">-C</span> "<span class="selector-tag">shiino123</span>@<span class="keyword">gmail</span>.<span class="keyword">com</span>"</span><br></pre></td></tr></table></figure>
+<p>邮箱填你自己的，连敲2下回车，得到我们的ssh私钥和公钥。<br><img src="./images/1511977368987.jpg" alt="enter description here"><br>如图所示，笔者的在h:\myeclipse_git.ssh\ 下，打开该目录可以找到，公钥文件id_rsa.pub。<br>用记事本打开，全选复制其中内容。<br><img src="./images/1511977630610.jpg" alt="enter description here"></p>
+<p>打开网页github，进入setting<br><img src="./images/1511974857446.jpg" alt="enter description here"></p>
+<p>按如下顺序点击<br><img src="./images/1511974964092.jpg" alt="enter description here"><br>设置ssh key，title随便写，将公钥内容粘贴到key中。</p>
+<p>Git Bash使用命令<br>ssh -T git@github.com<br>查看ssh key是否添加成功，如下为成功。<br><img src="./images/1511978224267.jpg" alt="enter description here"><br>4.创建用于发布博客的git工程<br><img src="./images/1511974771522.jpg" alt="enter description here"><br>保证两个小框里内容一致，项目前缀和用户名需一致。<br>5.发布<br>复制git项目ssh地址<br><img src="./images/1511979657015.jpg" alt="enter description here"><br>将地址填入 _config.yml 文件中，配置如下<br><img src="./images/1511979586514.jpg" alt="enter description here"></p>
+<p>使用命令</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> hexo-deployer-git <span class="comment">--save</span></span><br></pre></td></tr></table></figure>
+<p>再直接使用下面一套命令完整完成清理、重新编译、发布的一揽子行为</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo <span class="keyword">g</span> &amp;&amp; hexo <span class="built_in">d</span></span><br></pre></td></tr></table></figure>
+<p>就大功告成啦！效果如下<br><img src="./images/1511979925274.jpg" alt="enter description here"></p>
+<p><strong>额外1–换主题</strong><br>找到你喜欢的主题，以yiliya为例<br>切换到themes目录，下载</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">https</span>://github.com/litten/hexo-theme-yilia.git themes/yilia</span><br></pre></td></tr></table></figure>
+<p>更新<br>切换到到themes/yilia下</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git pull</span></span><br></pre></td></tr></table></figure>
+<p>设置主题，在 _config.yml 文件中，更改<br>theme: yilia</p>
+<p>使用命令生成主页信息等</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="selector-tag">i</span> hexo-generator-json-<span class="attribute">content</span> --save</span><br></pre></td></tr></table></figure>
+<p>重新清理编译发布</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo <span class="keyword">g</span> &amp;&amp; hexo <span class="built_in">d</span></span><br></pre></td></tr></table></figure>
+<p>稍等一会儿生效，浏览网页，如下图<br><img src="./images/1511981419117.jpg" alt="enter description here"></p>
+<p><strong>额外2–稳定运行后的使用命令</strong><br><code>hexo new &quot;postName&quot;</code> #新建文章<br><code>hexo new page &quot;pageName&quot;</code> #新建页面<br><code>hexo generate</code> #生成静态页面至public目录<br><code>hexo server</code> #开启预览访问端口（默认端口4000，’ctrl + c’关闭server）<br><code>hexo deploy</code> #将.deploy目录部署到GitHub</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo <span class="keyword">new</span> <span class="type"></span>[layout] &lt;title&gt;</span><br><span class="line">hexo <span class="keyword">new</span> <span class="type">photo</span> <span class="string">"My Gallery"</span></span><br><span class="line">hexo <span class="keyword">new</span> <span class="type"></span>"Hello World<span class="string">" --lang tw</span></span><br></pre></td></tr></table></figure>
+<p>参考：<br><a href="https://segmentfault.com/a/1190000002632530" target="_blank" rel="noopener">https://segmentfault.com/a/1190000002632530</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">github,hexo,博客</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/30/使用Github和hexo搭建自己的博客/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -313,6 +428,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">github,hexo,博客</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
